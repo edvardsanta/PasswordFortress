@@ -2,6 +2,20 @@ package storage
 
 import "sync"
 
+/*
+WARNING: The information is not currently being encrypted. It is necessary to implement a password encryption algorithm. 
+  bcrypt
+  Argon2
+  PBKDF2
+  scrypt
+  SHA-256 with salt
+  AES (Advanced Encryption Standard)
+  RSA (Rivest-Shamir-Adleman)
+  Blowfish
+  Twofish
+  Salsa20
+*/
+
 type Storage struct {
 	//Read-write mutex, allowing sync of shared resouces (ensuring that only one goroutine can hold the mutex at a time.)
 	mutex sync.RWMutex
