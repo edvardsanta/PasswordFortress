@@ -1,0 +1,67 @@
+definitions:
+  passwordcore.CreateUserResponse:
+    properties:
+      message:
+        example: User created successfully
+        type: string
+      user:
+        $ref: '#/definitions/passwordcore.User'
+    type: object
+  passwordcore.User:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /passwords:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user
+      parameters:
+      - description: User object
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/passwordcore.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/passwordcore.CreateUserResponse'
+      summary: Create a user
+      tags:
+      - users
+  /passwords/{username}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve the password for a given username and service
+      parameters:
+      - description: Username [service]
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Password
+          schema:
+            type: string
+        "404":
+          description: Password not found for the username
+          schema:
+            type: string
+      summary: Get password
+      tags:
+      - passwords
+swagger: "2.0"

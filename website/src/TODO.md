@@ -1,0 +1,3 @@
+- [] Create a login system
+- [] Use cache (redis)
+- [] Create a page to read and insert password 
