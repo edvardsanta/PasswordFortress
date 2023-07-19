@@ -1,0 +1,28 @@
+﻿@page
+@model PasswordFortress.Pages.Auth.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>LoginModel</h1>
+
+<div>
+    <h4>Login</h4>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="UserAuth.UsernameOrEmail" class="control-label"></label>
+            <input asp-for="UserAuth.UsernameOrEmail" class="form-control" />
+            <span asp-validation-for="UserAuth.UsernameOrEmail" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserAuth.Password" class="control-label"></label>
+            <input asp-for="UserAuth.Password" class="form-control" />
+            <span asp-validation-for="UserAuth.Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

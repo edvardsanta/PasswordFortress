@@ -1,0 +1,52 @@
+﻿@page
+@model PasswordFortress.Pages.Password.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PasswordManagerModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordManagerModel.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordManagerModel.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordManagerModel.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordManagerModel.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordManagerModel.PassPhrase)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordManagerModel.PassPhrase)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordManagerModel.Url)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordManagerModel.Url)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordManagerModel.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordManagerModel.Description)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="PasswordManagerModel.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
