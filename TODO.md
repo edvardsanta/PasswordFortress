@@ -1,3 +1,4 @@
 - [] Encrypt the passwords
 - [] Use a relational database to store passwords
 - [] Separate command line tool from api
+- [ ] Create login access in cli and create a feature to create a new user
