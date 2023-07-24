@@ -5,15 +5,21 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/edvardsanta/SimplePasswordManager/internal/login"
 	"github.com/edvardsanta/SimplePasswordManager/pkg/storage"
 )
 
 func RunREPL() {
 	scanner := bufio.NewScanner(os.Stdin)
-	store := storage.NewStorage()
-
+	store, err := storage.NewStorage()
+	if err != nil {
+		println("aaaa")
+	}
 	fmt.Println("Welcome to Simple Password Manager!")
+	fmt.Println("Please login before continue")
 
+	//  TODO: Create  login access and handle login
+	login.GetUserInput()
 	for {
 		fmt.Println("\nPlease choose an option:")
 		fmt.Println("1. Set new password")
