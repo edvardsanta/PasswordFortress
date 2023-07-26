@@ -14,5 +14,37 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin: 60px;
+    display: flex;
 }
+
+.login-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px; /* Ajuste o valor conforme necessário */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.userLabel {
+    
+}
+
+#username {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-self: center;
+}
+
+#password {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-self: center;
+}
+

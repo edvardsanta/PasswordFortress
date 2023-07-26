@@ -2,27 +2,38 @@
 @model PasswordFortress.Pages.Auth.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Login";
 }
+<html>
+<head>
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+    @*<h1>LoginModel</h1>*@
 
-<h1>LoginModel</h1>
+    <div class="login-frame">
+        <h4>Login</h4>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br />
+            <div class="form-group">
+                <label class="control-label" id="userLabel">Username or Email</label>
+                <input asp-for="UserAuth.UsernameOrEmail" id="username" class="form-control" />
+                <span asp-validation-for="UserAuth.UsernameOrEmail" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label class="control-label" id="passLabel">Password</label>
+                <input type="password" asp-for="UserAuth.Password" id="password" class="form-control" />
+                <span asp-validation-for="UserAuth.Password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Confirmar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
 
-<div>
-    <h4>Login</h4>
-    <form method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="UserAuth.UsernameOrEmail" class="control-label"></label>
-            <input asp-for="UserAuth.UsernameOrEmail" class="form-control" />
-            <span asp-validation-for="UserAuth.UsernameOrEmail" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserAuth.Password" class="control-label"></label>
-            <input asp-for="UserAuth.Password" class="form-control" />
-            <span asp-validation-for="UserAuth.Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </form>
-</div>
+

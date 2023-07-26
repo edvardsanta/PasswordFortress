@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace PasswordFortress.Pages
 {
@@ -12,9 +14,18 @@ namespace PasswordFortress.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            Console.Write("aaa");
+            //// Limpeza de cookies
+            //await HttpContext.SignOutAsync();
+
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Auth/Index");
+            }
+
+            return Page();
         }
     }
 }

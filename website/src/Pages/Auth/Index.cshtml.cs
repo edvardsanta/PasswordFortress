@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -45,8 +48,22 @@ namespace PasswordFortress.Pages.Auth
                 // Example: Check if the credentials are valid
                 if (IsValidCredentials(UserAuth.UsernameOrEmail, UserAuth.Password))
                 {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, UserAuth.UsernameOrEmail),
+                        // Adicione outras claims relevantes do usuário aqui, se necessário
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                    //HttpContext.Session.SetString("user_authenticated", "true");
+
+                    return RedirectToPage("/Index"); // Redirecionar para a página inicial após o login bem-sucedido
                     // Successful login, redirect to a protected page
-                    return RedirectToPage("/ProtectedPage");
+                    //return RedirectToPage("/ProtectedPage");
                 }
                 else
                 {
@@ -54,6 +71,8 @@ namespace PasswordFortress.Pages.Auth
                     ModelState.AddModelError(string.Empty, "Invalid username or password.");
                 }
             }
+
+
 
             // Redisplay the login page with validation errors
             return Page();
