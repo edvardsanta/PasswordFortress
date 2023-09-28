@@ -1,8 +1,8 @@
 package main
 
 import (
+	api_routes "github.com/edvardsanta/SimplePasswordManager/api"
 	"github.com/edvardsanta/SimplePasswordManager/docs"
-	passwordcore "github.com/edvardsanta/SimplePasswordManager/pkg"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -10,17 +10,11 @@ import (
 
 func main() {
 	r := gin.Default()
+  api_routes.SetupRoutes(r) 
+	
 
-	// i think i will not use v[0-9]
-	docs.SwaggerInfo.BasePath = "/api/v1"
-	v1 := r.Group("/api/v1")
-	{
-		eg := v1.Group("/passwords")
-		{
-			eg.POST("", passwordcore.SetPassword)
-			eg.GET("/:username", passwordcore.GetPassword)
-		}
-	}
+  // Swagget stuff
+  docs.SwaggerInfo.BasePath = "/api/v1"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8080")
 }

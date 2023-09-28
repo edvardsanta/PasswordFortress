@@ -1,13 +1,13 @@
 definitions:
-  passwordcore.CreateUserResponse:
+  controllers.CreateUserResponse:
     properties:
       message:
         example: User created successfully
         type: string
       user:
-        $ref: '#/definitions/passwordcore.User'
+        $ref: '#/definitions/controllers.User'
     type: object
-  passwordcore.User:
+  controllers.User:
     properties:
       password:
         type: string
@@ -28,14 +28,14 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/passwordcore.User'
+          $ref: '#/definitions/controllers.User'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/passwordcore.CreateUserResponse'
+            $ref: '#/definitions/controllers.CreateUserResponse'
       summary: Create a user
       tags:
       - users
