@@ -5,55 +5,72 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: "2023-10-08T03:26:16Z"
+  creationTimestamp: "2023-10-17T19:57:45Z"
   labels:
     app: passwordfortress
   name: passwordfortress
 spec:
   containers:
-  - args:
-    - postgres
-    env:
-    - name: POSTGRES_PASSWORD
-      value: "12345"
-    image: docker.io/library/postgres:latest
-    name: postgres
-    ports:
-    - containerPort: 5432
-      hostPort: 5432
-    - containerPort: 5672
-      hostPort: 5672
-    - containerPort: 80
-      hostPort: 8000
-    - containerPort: 8080
-      hostPort: 8080
-    - containerPort: 80
-      hostPort: 9876
-    - containerPort: 15672
-      hostPort: 15672
-    volumeMounts:
-    - mountPath: /var/lib/postgresql/data
-      name: 78d92f2048f09ec0fa2503565b22194bd9eb21230cf35e6f2435aa9159f37ad7-pvc
-  - image: localhost/passwordfortress_frontend:latest
-    name: frontend
-  - image: localhost/passwordfortress_api:latest
-    name: api
-  - env:
-    - name: PGADMIN_DEFAULT_PASSWORD
-      value: PgAdmin2023
-    - name: PGADMIN_DEFAULT_EMAIL
-      value: abc@abc.com.br
-    image: docker.io/dpage/pgadmin4:latest
-    name: pgadmin
-    securityContext: {}
-    volumeMounts:
-    - mountPath: /var/lib/pgadmin
-      name: 6bca1025636d3c43f5ba9409f8e55533606735d32f3f3604c28a29fb1de7d0b1-pvc
+    - env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: abc@abc.com.br
+        - name: PGADMIN_DEFAULT_PASSWORD
+          value: PgAdmin2023
+      image: docker.io/dpage/pgadmin4:latest
+      name: pgadmin
+      ports:
+        - containerPort: 5432
+          hostPort: 5432
+        - containerPort: 5672
+          hostPort: 5672
+        - containerPort: 80
+          hostPort: 8000
+        - containerPort: 8080
+          hostPort: 8080
+        - containerPort: 80
+          hostPort: 9876
+        - containerPort: 15672
+          hostPort: 15672
+      securityContext: {}
+      volumeMounts:
+        - mountPath: /var/lib/pgadmin
+          name: 1774303a697c3ea6e1eee99ba1f536195a060f3253568e4846e9d5b25399ff66-pvc
+    - image: localhost/passwordfortress_api:latest
+      name: api
+    - image: localhost/passwordfortress_frontend:latest
+      name: frontend
+    - args:
+        - -e
+        - POSTGRES_PASSWORD=12345
+      image: docker.io/library/postgres:latest
+      name: vibrantkeller
+      volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: c3fbfcfb3c0c1f1d59e28cfeecc060fd87e63e3f9f5fb111e985640bdb922ad5-pvc
+    - args:
+        - redis-server
+      image: docker.io/library/redis:latest
+      name: hardcorejohnson
+      volumeMounts:
+        - mountPath: /data
+          name: 180f338615e123832386e7e786cb6238991779fc35fb29f99095446d44dbf41c-pvc
+    - args:
+        - rabbitmq-server
+      image: docker.io/library/rabbitmq:3.11-management
+      name: suspiciousedison
+      volumeMounts:
+        - mountPath: /var/lib/rabbitmq
+          name: c8c7083af24755e012488d927c4ba52944a3cbcd9afd24ae8749cff990185921-pvc
   volumes:
-  - name: 78d92f2048f09ec0fa2503565b22194bd9eb21230cf35e6f2435aa9159f37ad7-pvc
-    persistentVolumeClaim:
-      claimName: 78d92f2048f09ec0fa2503565b22194bd9eb21230cf35e6f2435aa9159f37ad7
-  - name: 6bca1025636d3c43f5ba9409f8e55533606735d32f3f3604c28a29fb1de7d0b1-pvc
-    persistentVolumeClaim:
-      claimName: 6bca1025636d3c43f5ba9409f8e55533606735d32f3f3604c28a29fb1de7d0b1
-
+    - name: 1774303a697c3ea6e1eee99ba1f536195a060f3253568e4846e9d5b25399ff66-pvc
+      persistentVolumeClaim:
+        claimName: 1774303a697c3ea6e1eee99ba1f536195a060f3253568e4846e9d5b25399ff66
+    - name: c3fbfcfb3c0c1f1d59e28cfeecc060fd87e63e3f9f5fb111e985640bdb922ad5-pvc
+      persistentVolumeClaim:
+        claimName: c3fbfcfb3c0c1f1d59e28cfeecc060fd87e63e3f9f5fb111e985640bdb922ad5
+    - name: 180f338615e123832386e7e786cb6238991779fc35fb29f99095446d44dbf41c-pvc
+      persistentVolumeClaim:
+        claimName: 180f338615e123832386e7e786cb6238991779fc35fb29f99095446d44dbf41c
+    - name: c8c7083af24755e012488d927c4ba52944a3cbcd9afd24ae8749cff990185921-pvc
+      persistentVolumeClaim:
+        claimName: c8c7083af24755e012488d927c4ba52944a3cbcd9afd24ae8749cff990185921
