@@ -10,7 +10,7 @@ COPY . .
 RUN go mod tidy
 
 # Build the Go application
-RUN go build -o main ./cmd/main.go
+RUN go build -o main ./api/main.go
 
 # Expose port 8080 for the Gin application
 EXPOSE 8080

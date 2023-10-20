@@ -8,8 +8,10 @@ import (
 
 func TestStorageSetAndGet(t *testing.T) {
 	//Arrange
-	s := storage.NewStorage()
-
+	s, err := storage.NewStorage()
+	if err != nil {
+		panic("doido")
+	}
 	username := "john"
 	password := "password123"
 
@@ -28,7 +30,7 @@ func TestStorageSetAndGet(t *testing.T) {
 
 func TestStorageGetNonexistentUsername(t *testing.T) {
 	//Arrange
-	s := storage.NewStorage()
+	s, err := storage.NewStorage()
 	// Get a non-existent username
 
 	//Act
