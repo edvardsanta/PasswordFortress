@@ -7,8 +7,6 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: 12345
-    networks:
-      - postgres_net
 
   pgadmin:
     image: dpage/pgadmin4
@@ -19,8 +17,6 @@ services:
       - "9876:80"
     depends_on:
       - db
-    networks:
-      - postgres_net
 
   # Redis
   redis:
@@ -51,24 +47,20 @@ services:
       - db
       - redis
       - rabbitmq
+
   # # Go API
-  # api:
-  #   build:
-  #     context: ./src/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - db
-  #     - redis
-  #     - rabbitmq
-  #   environment:
-  #     GIN_MODE: release
-  #   networks:
-  #     - postgres_net
+  api:
+    build:
+      context: ./src/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
+    environment:
+      GIN_MODE: release
 
 volumes:
   postgres_data:
-
-networks:
-  postgres_net:
