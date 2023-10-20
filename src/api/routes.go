@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/edvardsanta/SimplePasswordManager/api/controllers"
-	postgre "github.com/edvardsanta/SimplePasswordManager/data"
+	db_repository "github.com/edvardsanta/SimplePasswordManager/data"
 	"github.com/edvardsanta/SimplePasswordManager/internal/services"
 	"github.com/gin-gonic/gin"
 )
@@ -30,13 +30,13 @@ func setupPasswordRoutes(passwordGroup *gin.RouterGroup) {
 }
 
 func configureControllers() (*controllers.PasswordController, error) {
-	postgreRepository, err := postgre.NewPostgreRepository()
+	database_repo, err := db_repository.Connect()
 	if err != nil {
 		return nil, err
 	}
 
 	passwordService := services.PasswordService{
-		PostgreRepository: *postgreRepository,
+		DatabaseRepository: *database_repo,
 	}
 	passwordController := &controllers.PasswordController{
 		PasswordService: &passwordService,

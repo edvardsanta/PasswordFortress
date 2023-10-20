@@ -10,11 +10,10 @@ import (
 
 func main() {
 	r := gin.Default()
-  api_routes.SetupRoutes(r) 
-	
+	api_routes.SetupRoutes(r)
 
-  // Swagget stuff
-  docs.SwaggerInfo.BasePath = "/api/v1"
+	// Swagget stuff
+	docs.SwaggerInfo.BasePath = "/api/v1"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8080")
 }
