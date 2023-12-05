@@ -1,14 +1,13 @@
-﻿@page "Admin/Index"
-@model PasswordFortressFront.Models.UserListViewModel
+﻿@model PasswordFortressFront.Models.UserListViewModel
 @{
-    //ViewData["Title"] = "Registered Users";
+    ViewData["Title"] = "Registered Users";
 }
 
 <h1 class="bg-info text-white">Registered Users</h1>
 <a asp-action="Create" class="btn btn-secondary">Create User</a>
 
 @* @if (!string.IsNullOrEmpty(Model)) *@
-@if (Model.Users != null)
+@if (Model != null && Model.Users != null)
 {
     <table class="table table-sm table-bordered">
         <tr>

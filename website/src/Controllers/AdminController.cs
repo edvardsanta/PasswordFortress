@@ -27,7 +27,7 @@ namespace PasswordFortressFront.Controllers
             _logger = logger;
         }
 
-        // GET: /Admin
+
         public IActionResult Index()
         {
             //var viewModel = "teste";
@@ -35,7 +35,6 @@ namespace PasswordFortressFront.Controllers
             {
                 Users = _userManager.Users.ToList()
             };
-            ViewData["Title"] = "Registered Users";
             return View("Pages/Admin/Index.cshtml", viewModel);
         }
 
