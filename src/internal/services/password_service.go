@@ -1,16 +1,17 @@
 package services
-import(
-  data "github.com/edvardsanta/SimplePasswordManager/data"
+
+import (
+	data "github.com/edvardsanta/SimplePasswordManager/data"
 )
+
 type PasswordService struct {
-  PostgreRepository data.PostgreRepository 
+	DatabaseRepository data.DatabaseRepository
 }
 
 func (*PasswordService) GetPassword() {
-   
-}
-
-func (*PasswordService) SetPassword(){
 
 }
 
+func (*PasswordService) SetPassword() {
+
+}
